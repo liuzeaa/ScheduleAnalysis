@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学科选择人数统计</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h2><select class="select mt20" id="school"></select></h2>
+        <div class="left" id="leftChart" style="width: 50%;height: 700px"></div>
+        <div class="right" id="rightChart" style="width: 50%;height: 700px"></div>
+    </div>
+    <script>
+        var schools = ['妙峰山学校','大峪中学','永定中学','清水中学','王平中学','雁翅中学','军庄中学'];
+        var options = ''
+        $(schools).each(function(i,item){
+            options+='<option value="'+i+'">'+item+'</option>';
+        })
+        $('#school').append(options);
+        var text = $('#school option:selected').text();
+        $(function () {
+            initRightChart()
+            initLeftChart()
+            $('#school').change(function(){
+                text = $(this).children('option:selected').text();
+                initRightChart()
+                initLeftChart()
+            })
+        })
+        function initLeftChart(){
+
+            var  leftChart = echarts.init(document.getElementById('leftChart'));
+            var option={
+                title: {
+                    text: text+'学科选择人数统计',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}课时"
+                },
+                radar: {
+                    name: {
+                        textStyle: {
+                            color: '#fff',
+                            backgroundColor: '#999',
+                            borderRadius: 3,
+                            padding: [3, 5]
+                        }
+                    },
+                    indicator: [
+                        { name: '物理',max:6000},
+                        { name: '化学',max:6000},
+                        { name: '生物',max:6000},
+                        { name: '历史',max:6000},
+                        { name: '地理',max:6000},
+                        { name: '政治',max:6000}
+                    ]
+                },
+                series: [{
+                    name: text+'学科选择人数统计',
+                    type: 'radar',
+                    data : [
+                        {
+                            value : [3300,5800,3200,2000,3500,4500],
+                        }
+                    ]
+                }]
+            }
+            leftChart.setOption(option);
+        }
+        function initRightChart(){
+            var subjects = ['物理','化学','生物','历史','地理','政治'];
+
+            var  rightChart = echarts.init(document.getElementById('rightChart'));
+            var option = {
+                title:{
+                    text:text+"学科选择人数统计",
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}课时"
+                },
+                legend: {
+                    data:['学科选择人数统计'],
+                    top:'bottom',
+                    left:'center'
+                },
+                xAxis :
+                    {
+                        type : 'category',
+                        data: subjects
+                    },
+                color:['#358CC1'],
+                yAxis : {
+                    type : 'value'
+                },
+                series : [
+                    {
+                        name:text+'学科选择人数统计',
+                        type:'bar',
+                        barWidth:'40%',
+                        data:[3300,5800,3200,2000,3500,4500]
+                    }
+                ]
+            };
+
+            rightChart.setOption(option);
+        }
+    </script>
+</body>
+</html>

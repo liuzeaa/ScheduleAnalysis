@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分布分析</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+</head>
+<body>
+    <div id="content">
+        <div class="left" style="width: 50%;">
+            <h2>校间选课学科分布</h2>
+            <select class="select mt20" id="subject" onchange="initLeftChart()"></select>
+            <div style="width: 100%;height:700px;" id="leftChart"></div>
+        </div>
+        <div class="right" style="width: 50%;">
+            <h2>校间选课组合分布</h2>
+            <select class="select mt20" id="subjectGroup" onchange="initRightChart()"></select>
+            <div style="width: 100%;height:700px;" id="rightChart"></div>
+        </div>
+    </div>
+    <script>
+
+        var schools = ['妙峰山学校','大峪中学','永定中学','清水中学','王平中学','雁翅中学','军庄中学'];
+
+        $(function(){
+            initLeftChart();
+            initRightChart();
+        })
+        function initLeftChart(){
+            var subjects = ['物理','化学','生物','历史','地理','政治'];
+            var options = ''
+            $(subjects).each(function(i,item){
+                options+='<option value="'+i+'">'+item+'</option>';
+            })
+            $('#subject').append(options);
+            var text = $('#subject option:selected').text();
+            var  leftChart = echarts.init(document.getElementById('leftChart'));
+            var leftOption = {
+                title : {
+                    text: text,
+                    x:'center',
+                    top:'50'
+                },
+                color:['#358CC1','#2D9C9F','#A4C37B','#9D9394','#84ADE4','#FFC000','#205474'],
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'horizontal',
+                    left: 'center',
+                    bottom:'20',
+                    data: schools
+                },
+                series : [
+                    {
+                        name: text,
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '50%'],
+                        data:[
+                            {value:335, name:'妙峰山学校'},
+                            {value:310, name:'大峪中学'},
+                            {value:234, name:'永定中学'},
+                            {value:135, name:'清水中学'},
+                            {value:158, name:'王平中学'},
+                            {value:600, name:'雁翅中学'},
+                            {value:235, name:'军庄中学'}
+                        ],
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            leftChart.setOption(leftOption);
+        }
+
+        function initRightChart(){
+            var subjectGroups = ['政史地','化生地','化生史','生政史','物化生','生史地','生政地','化生政','化政史','物化政','化史地','物生地','物政地','物化地','物政史','物史地','物化史','物生政','物生史','化政地'];
+            var options = ''
+            $(subjectGroups).each(function(i,item){
+                options+='<option value="'+i+'">'+item+'</option>';
+            })
+            $('#subjectGroup').append(options);
+            var text = $('#subjectGroup option:selected').text();
+            var  rightChart = echarts.init(document.getElementById('rightChart'));
+            var rightOption = {
+                title : {
+                    text: text+'组合人数学校占比',
+                    x:'center',
+                    top:'50'
+                },
+                color:['#358CC1','#2D9C9F','#A4C37B','#9D9394','#84ADE4','#FFC000','#205474'],
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'horizontal',
+                    left: 'center',
+                    bottom:'50',
+                    data: schools
+                },
+                series : [
+                    {
+                        name: text+'组合人数学校占比',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '50%'],
+                        data:[
+                            {value:335, name:'妙峰山学校'},
+                            {value:310, name:'大峪中学'},
+                            {value:234, name:'永定中学'},
+                            {value:135, name:'清水中学'},
+                            {value:158, name:'王平中学'},
+                            {value:600, name:'雁翅中学'},
+                            {value:235, name:'军庄中学'}
+                        ],
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            rightChart.setOption(rightOption);
+        }
+
+    </script>
+</body>
+</html>

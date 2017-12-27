@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>教室分类使用率统计</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="content">
+    <h2><select class="select mt20" id="school" onchange="initChart()"></select></h2>
+    <div id="centerChart" style="width:60%;height: 700px;display: inline-block"></div>
+</div>
+<script>
+    var schools = ['八一中学','妙峰山学校','大峪中学','永定中学','清水中学','王平中学','雁翅中学','军庄中学'];
+    var options = ''
+    $(schools).each(function(i,item){
+        options+='<option value="'+i+'">'+item+'</option>';
+    })
+    $('#school').append(options);
+
+    $(function(){
+        initChart()
+    })
+    function initChart(){
+        var text = $('#school option:selected').text();
+        var  centerChart = echarts.init(document.getElementById('centerChart'));
+        var option = {
+            title:{
+                text:text+"教室分类使用率统计",
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            legend: {
+                data:['教室分类使用率'],
+                top:'bottom',
+                left:'center'
+            },
+            xAxis :
+                {
+                    type : 'category',
+                    data:['普通教室','专业实验室','体育馆','音乐厅','会议室']
+                },
+            color:['#5B9BD5'],
+            yAxis : {
+                type : 'value'
+            },
+            series : [
+                {
+                    name:text+'教室分类使用率',
+                    type:'bar',
+                    barWidth:'50%',
+                    data:[88,55,87,22,67]
+                }
+            ]
+        }
+        centerChart.setOption(option);
+    }
+</script>
+</body>
+</html>

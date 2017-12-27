@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>等级考选科前后平均分对比</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h2>等级考选科前后平均分对比</h2>
+        <h3 style="color:#EC6464">改革就是机会</h3>
+        <h2><select class="select mt20" id="school"></select></h2>
+        <div class="left" style="width:50%;height:700px;" id="leftChart"></div>
+        <div class="right" style="width:50%;height:700px;" id="rightChart"></div>
+    </div>
+    <script>
+        var schools = ['妙峰山学校','大峪中学','永定中学','清水中学','王平中学','雁翅中学','军庄中学'];
+        var options = ''
+        $(schools).each(function(i,item){
+            options+='<option value="'+i+'">'+item+'</option>';
+        })
+        $('#school').append(options);
+        var text = $('#school option:selected').text();
+        $('#school').change(function(){
+            text = $(this).children('option:selected').text();
+            initLeftChart();
+            initRightChart()
+        })
+        $(function(){
+            initLeftChart();
+            initRightChart()
+        })
+        function  initLeftChart() {
+            var  leftChart = echarts.init(document.getElementById('leftChart'));
+            var leftOption = {
+                title : {
+                    text: text+'各学科',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['年级平均分','选考平均分'],
+                    left:'center',
+                    top:'bottom',
+                    orient: 'horizontal'
+                },
+                color:['#5B9BD5','#ED7D31'],
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['物理', '化学', '生物', '地理']
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'年级平均分',
+                        type:'bar',
+                        data:[60, 70,63, 70]
+
+                    },
+                    {
+                        name:'选考平均分',
+                        type:'bar',
+                        data:[63, 79, 60, 97]
+
+                    }
+                ]
+            };
+            leftChart.setOption(leftOption);
+        }
+        function  initRightChart() {
+            var  rightChart = echarts.init(document.getElementById('rightChart'));
+            var rightOption = {
+                title : {
+                    text: text+'各学科',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['年级平均分','选考平均分'],
+                    left:'center',
+                    top:'bottom',
+                    orient: 'horizontal'
+                },
+                color:['#5B9BD5','#ED7D31'],
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['物理', '化学', '生物', '地理']
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'年级平均分',
+                        type:'line',
+                        data:[60, 70,63, 70]
+
+                    },
+                    {
+                        name:'选考平均分',
+                        type:'line',
+                        data:[63, 79, 60, 97]
+
+                    }
+                ]
+            };
+            rightChart.setOption(rightOption);
+        }
+
+    </script>
+</body>
+</html>

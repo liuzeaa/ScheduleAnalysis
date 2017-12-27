@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>男女选科对比</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h2><select id="school" class="mt20 select" onchange="initChart()"></select></h2>
+        <div id="centerChart" style="width:70%;height:700px;display: inline-block"></div>
+    </div>
+    <script>
+        var schools = ['妙峰山学校','大峪中学','永定中学','清水中学','王平中学','雁翅中学','军庄中学'];
+        var options = ''
+        $(schools).each(function(i,item){
+            options+='<option value="'+i+'">'+item+'</option>';
+        })
+        $('#school').append(options);
+
+        $(function(){
+            initChart()
+        })
+        function initChart(){
+            var text = $('#school option:selected').text();
+            var  centerChart = echarts.init(document.getElementById('centerChart'));
+            var option = {
+                title:{
+                    text:text+'男女选科对比',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                legend: {
+                    data:['男生比女生多', '女生比男生多'],
+                    top:'bottom',
+                    left:'center'
+                },
+                xAxis :
+                    {
+                        type : 'category',
+                        data : ['物理', '化学', '生物', '地理', '历史', '政治']
+                    },
+                color:['#72AB64','#EB6160'],
+                yAxis : {
+                    type : 'value',
+                    max:100,
+                },
+                series : [
+                    {
+                        name:'男生比女生多',
+                        type:'bar',
+                        data:[24.56, 14.87,0 , 0, 0, 0]
+                    },
+                    {
+                        name:'女生比男生多',
+                        type:'bar',
+                        data:[0, 0, 2.37, 3.96, 12.54, 25.87]
+                    }
+                ]
+            };
+
+            centerChart.setOption(option);
+        }
+
+    </script>
+</body>
+</html>

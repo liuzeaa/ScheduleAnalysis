@@ -1,0 +1,15 @@
+*{padding:0;margin:0;box-sizing: border-box;}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
+.clearfix{zoom:1}
+.clearfix:after,.clearfix:before{content:"";display:block;height:0;clear:both;visibility:hidden;}
+#content{
+    text-align:center;
+}
+.mt20{
+    margin-top: 20px;
+}

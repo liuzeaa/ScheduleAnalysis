@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计量分析（校间-学科周课时）</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h2><select  id="subject" class="select mt20" onchange="initChart()"></select></h2>
+        <div id="centerChart" style="width:60%;height:700px;display: inline-block"></div>
+    </div>
+    <script>
+        var schools = ['八一中学','妙峰山学校','大峪中学','永定中学','清水中学','王平中学','雁翅中学','军庄中学'];
+        $(function(){
+            initChart();
+        })
+        function initChart(){
+            var subjects = ['物理','化学','生物','历史','地理','政治'];
+            var options = ''
+            $(subjects).each(function(i,item){
+                options+='<option value="'+i+'">'+item+'</option>';
+            })
+            $('#subject').append(options);
+            var text = $('#subject option:selected').text();
+            var  centerChart = echarts.init(document.getElementById('centerChart'));
+            var option = {
+                title:{
+                    text:text+"学科-校周课时/人统计",
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}课时"
+                },
+                legend: {
+                    data:['平均周课/人'],
+                    top:'bottom',
+                    left:'center'
+                },
+                xAxis :
+                    {
+                        type : 'category',
+                        data: schools
+                    },
+                color:['#358CC1'],
+                yAxis : {
+                    type : 'value'
+                },
+                series : [
+                    {
+                        name:text+'平均周课/人',
+                        type:'bar',
+                        data:[6,11,12,12,12,12,11,14],
+                        markLine : {
+                            data : [
+                                {type : 'average', name : '平均值'}
+                            ]
+                        }
+                    }
+                ]
+            };
+
+            centerChart.setOption(option);
+        }
+
+    </script>
+</body>
+</html>

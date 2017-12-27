@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>区级单学科教师工作量</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h2><select class="select mt20" id="subject" onchange="initChart()"></select></h2>
+        <div id="centerChart" style="width:60%;height: 700px;display: inline-block"></div>
+    </div>
+    <script>
+        var subjects = ['物理','化学','生物','历史','地理','政治'];
+        var options = ''
+        $(subjects).each(function(i,item){
+            options+='<option value="'+i+'">'+item+'</option>';
+        })
+        $('#subject').append(options);
+
+        $(function(){
+            initChart()
+        })
+        function initChart(){
+            var text = $('#subject option:selected').text();
+            var  centerChart = echarts.init(document.getElementById('centerChart'));
+            var option = {
+                title:{
+                    text:text+"学科-校周课时/人统计柱状图",
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}课时"
+                },
+                legend: {
+                    data:['周总课时'],
+                    top:'bottom',
+                    left:'center'
+                },
+                xAxis :
+                    {
+                        type : 'category',
+                        data: ['张江（军庄中学）','王得全（军庄中学）','赵东阳（军庄中学）','陈兰芝（雁翅中学）','郭泽（八一中学）']
+                    },
+                color:['#2D9C9F'],
+                yAxis : {
+                    type : 'value'
+                },
+                series : [
+                    {
+                        name:text+'周总课时',
+                        type:'bar',
+                        barWidth:'50%',
+                        data:[18,16,14,12,9],
+                        markLine : {
+                            data : [
+                                {type : 'average', name : '平均值'}
+                            ]
+                        }
+                    }
+                ]
+            }
+            centerChart.setOption(option);
+        }
+    </script>
+</body>
+</html>

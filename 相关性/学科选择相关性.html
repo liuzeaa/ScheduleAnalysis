@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学科选择相关性</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h2><select class="select mt20" id="subject" onchange="initChart()"></select></h2>
+        <div id="centerChart" style="width:70%;height:700px;display: inline-block"></div>
+    </div>
+    <script>
+        var subjects = ['物理','化学','生物','历史','地理','政治'];
+        var options = '';
+        $(subjects).each(function(i,item){
+            options+='<option value="'+i+'">'+item+'</option>';
+        })
+        $('#subject').append(options)
+        $(function(){
+            initChart();
+        })
+
+        function initChart(){
+            var text = $('#subject option:selected').text();
+            var ary = subjects.slice(0);
+            ary.splice(ary.indexOf(text),1);
+            var  centerChart = echarts.init(document.getElementById('centerChart'));
+            var option = {
+                title:{
+                    text:text+'学科选择相关性',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                xAxis :{
+                    type : 'value'
+                },
+                color:['#5B9BD5'],
+                yAxis : {
+                    type : 'category',
+                    data:ary
+                },
+                series : [
+                    {
+                        name:text+'学科选择',
+                        type:'bar',
+                        barWidth:'50%',
+                        data:[88,78,78,68,32]
+                    }
+                ]
+            };
+            centerChart.setOption(option);
+        }
+    </script>
+</body>
+</html>

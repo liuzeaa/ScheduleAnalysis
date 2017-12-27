@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生选科数据质量分析</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <div id="centerChart" style="width:70%;height:700px;display: inline-block"></div>
+    </div>
+    <script>
+        $(function(){
+            initChart()
+        })
+        var data = [
+            [
+                [88,88,88,'小明1','2017第一学期'],
+                [88,88,88,'小明2','2017第一学期'],
+                [88,88,88,'小明3','2017第一学期'],
+                [88,88,88,'小明4','2017第一学期'],
+                [88,88,88,'小明5','2017第一学期'],
+                [88,88,88,'小明6','2017第一学期'],
+                [88,88,88,'小明7','2017第一学期'],
+                [88,88,88,'小明8','2017第一学期'],
+                [88,88,88,'小明9','2017第一学期'],
+                [88,88,88,'小明10','2017第一学期'],
+            ]
+        ];
+        function initChart(){
+            var initChart = echarts.init(document.getElementById('centerChart'));
+            var option  ={
+                title: {
+                    text: '学生物理选科数据质量分析'
+                },
+                legend: {
+                    right: 10,
+                    data: ['2017第一学期', '2017第二学期']
+                },
+                xAxis: {
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
+                    }
+                },
+                yAxis: {
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
+                    },
+                    scale: true
+                },
+                series: [
+                    {
+                    name: '2017第一学期',
+                    data: data[0],
+                    type: 'scatter',
+                    symbolSize: function (data) {
+                        return Math.sqrt(data[2]) / 5e2;
+                    },
+                    label: {
+                        emphasis: {
+                            show: true,
+                            formatter: function (param) {
+                                return param.data[3];
+                            },
+                            position: 'top'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            shadowBlur: 10,
+                            shadowColor: 'rgba(120, 36, 50, 0.5)',
+                            shadowOffsetY: 5,
+                            color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                                offset: 0,
+                                color: 'rgb(251, 118, 123)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(204, 46, 72)'
+                            }])
+                        }
+                    }
+                }]
+            }
+            initChart.setOption(option)
+        }
+    </script>
+</body>
+</html>

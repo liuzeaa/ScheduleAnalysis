@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对比分析</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h2 style="color:#F3A947">组合前5名，后5名</h2>
+        <div class="left" style="width:50%;height:700px;">
+            <div id="left1Chart" style="width:100%;height: 350px;"></div>
+            <div id="left2Chart" style="width:100%;height: 350px;"></div>
+        </div>
+        <div class="right" style="width:50%;height:700px;">
+            <div id="right1Chart" style="width:100%;height: 350px;"></div>
+            <div id="right2Chart" style="width:100%;height: 350px;"></div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            left1Chart();
+            left2Chart();
+            right1Chart();
+        })
+        function left1Chart(){
+            var  left1Chart = echarts.init(document.getElementById('left1Chart'));
+            var left1Option = {
+                title:{
+                    text:'后五名',
+                    x:'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c}%"
+                },
+                series: [
+                    {
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {value:0.42, name:'化/物/政',itemStyle:{normal:{color:'#EB5F5E',borderColor:'#fff',borderWidth:2}}},
+                            {value:0.61, name:'生/物/地',itemStyle:{normal:{color:'#EB5F5E',borderColor:'#fff',borderWidth:2}}},
+                            {value:0.68, name:'化/历/地',itemStyle:{normal:{color:'#EB5F5E',borderColor:'#fff',borderWidth:2}}},
+                            {value:0.72, name:'生/物/历',itemStyle:{normal:{color:'#EB5F5E',borderColor:'#fff',borderWidth:2}}},
+                            {value:0.79, name:'生/化/政',itemStyle:{normal:{color:'#EB5F5E',borderColor:'#fff',borderWidth:2}}},
+                            {value:96.78,name:'',itemStyle:{normal:{color:'#DDDDDE'}}}
+                        ]
+                    }
+                ]
+            };
+            left1Chart.setOption(left1Option);
+        }
+        
+        function left2Chart() {
+            var  left2Chart = echarts.init(document.getElementById('left2Chart'));
+            var option = {
+
+            }
+            left2Chart.setOption(option)
+        }
+        function right1Chart(){
+            var  right1Chart = echarts.init(document.getElementById('right1Chart'));
+            var option = {
+                title:{
+                    text:'前五名',
+                    x:'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c}%"
+                },
+                series: [
+                    {
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {
+                                value:17.5,
+                                name:'物/化/生',
+                                itemStyle:{
+                                    normal:{
+                                        color:'#72AB64',
+                                        borderColor:'#fff',
+                                        borderWidth:2
+                                    }
+                                }
+                            },
+                            {value:9.94, name:'物/化/地',itemStyle:{normal:{color:'#72AB64',borderColor:'#fff',borderWidth:2}}},
+                            {value:6.03, name:'物/化/历',itemStyle:{normal:{color:'#72AB64',borderColor:'#fff',borderWidth:2}}},
+                            {value:5.77, name:'政/历/地',itemStyle:{normal:{color:'#72AB64',borderColor:'#fff',borderWidth:2}}},
+                            {value:4.96, name:'化/生/地',itemStyle:{normal:{color:'#72AB64',borderColor:'#fff',borderWidth:2}}},
+                            {value:55.8,name:'',itemStyle:{normal:{color:'#DDDDDE'}}}
+                        ]
+                    }
+                ]
+            };
+            right1Chart.setOption(option);
+        }
+    </script>
+</body>
+</html>

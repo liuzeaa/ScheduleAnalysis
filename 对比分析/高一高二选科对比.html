@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高一高二选科对比</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="content">
+    <h2><select class="select mt20" id="school" onchange="initChart()"></select></h2>
+    <div id="centerChart" style="width:70%;height:700px;display: inline-block"></div>
+</div>
+<script>
+    var schools = ['妙峰山学校','大峪中学','永定中学','清水中学','王平中学','雁翅中学','军庄中学'];
+    var options = ''
+    $(schools).each(function(i,item){
+        options+='<option value="'+i+'">'+item+'</option>';
+    })
+    $('#school').append(options);
+
+    $(function(){
+        initChart()
+    })
+    function initChart(){
+        var text = $('#school option:selected').text();
+        var  centerChart = echarts.init(document.getElementById('centerChart'));
+        var option = {
+            title:{
+                text:text+'高一高二选科对比',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            legend: {
+                data:['高一', '高二'],
+                top:'bottom',
+                left:'center'
+            },
+            xAxis :
+                {
+                    type : 'category',
+                    data : ['化学', '物理', '生物', '地理', '历史', '政治']
+                },
+            color:['#72AB64','#EB6160'],
+            yAxis : {
+                type : 'value',
+                max:100,
+            },
+            series : [
+                {
+                    name:'高一',
+                    type:'bar',
+                    data:[74.81, 76.79,38.30 , 37.22, 49.31, 31.39]
+                },
+                {
+                    name:'高二',
+                    type:'bar',
+                    data:[59.72, 49.51, 54.52, 46.57, 40.34, 36.33]
+                }
+            ]
+        };
+
+        centerChart.setOption(option);
+    }
+
+</script>
+</body>
+</html>
