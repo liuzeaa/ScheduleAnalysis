@@ -25,11 +25,15 @@
         function initChart(){
             var text = $('#subject option:selected').text();
             var  centerChart = echarts.init(document.getElementById('centerChart'));
-            var option = {
+            var option = option = {
                 title : {
-                    text: '区、校级'+text+'学科、学期平均分周期性分析',
+                    text: '区、校级'+text+'学科平均分周期性分析',
                     x:'center',
                     top:'20'
+                },
+                legend: {
+                    top:'bottom',
+                    data:['区、校级'+text+'学科、学期平均分周期性分析']
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -47,14 +51,27 @@
                 },
                 series: [
                     {
+                        name:'区、校级'+text+'学科平均分周期性分析',
                         type: 'line',
                         smooth: true,
+                        lineStyle: {
+                            normal: {
+                                width: 3,
+                                shadowColor: 'rgba(0,0,0,0.4)',
+                                shadowBlur: 10,
+                                shadowOffsetY: 10
+                            }
+                        },
                         data:[60,65,70,75,80,84]
                     }
+
                 ]
             };
+
+
             centerChart.setOption(option);
         }
     </script>
+
 </body>
 </html>
