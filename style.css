@@ -13,3 +13,83 @@
 .mt20{
     margin-top: 20px;
 }
+.wrap{
+    position: relative;;
+}
+.wrap_left,.wrap_right{
+    width:50%;
+}
+.wrap_left .title{
+    color:#72AB64
+}
+.wrap_right .title{
+    color:#EB6160
+}
+.process li {
+    height:30px;list-style:none;border-radius:5px;margin-top: 30px;
+}
+.wrap_left .process li{
+     background: #C7DDC1;
+ }
+.wrap_left .process li span{
+    line-height: 30px;color:#72AB64;float: right;margin-right: 10px;
+}
+.wrap_right .process li{
+    background: #F7C0BF;
+}
+.wrap_right .process li span{
+    line-height: 30px;color:#EB6160;float: left;margin-left: 10px;
+}
+.process li .outer{
+    height:30px;border-radius:5px;
+}
+.wrap_left .process li .outer{
+     background: #72AB64;float: right;
+ }
+.wrap_right .process li .outer{
+    background: #EB6160;float: left;
+}
+.subject{
+    position: absolute;left:50%;margin-left:-25px;top:55px;
+}
+.subject li{
+    border-radius: 50%;width:50px;height:50px;background: #F3A947;color:#fff;line-height: 50px;text-align: center;margin-top: 10px;list-style: none;
+}
+#left2Chart .process li .title{
+    color:#EB6160;text-align: right;line-height: 30px;
+}
+#left2Chart .process li .clearfix{
+    background: #F7C0BF;border-radius:5px 0px 0px 5px;
+}
+#left2Chart .process li .outer{
+    background: #EB6160;float: right;border-radius:5px 0px 0px 5px;
+}
+#left2Chart .process li span{
+    line-height: 30px;color:#EB6160;
+}
+
+#right2Chart .process li .title{
+    color:#72AB64;text-align: left;line-height: 30px;
+}
+#right2Chart .process li .clearfix{
+    background: #C7DDC1;border-radius:0px 5px 5px 0px;
+}
+#right2Chart .process li .outer{
+    background: #72AB64;float: left;border-radius:0px 5px 5px 0px;
+}
+#right2Chart .process li span{
+    line-height: 30px;color:#72AB64;
+}
+
+.mr10{
+    margin-right: 10px;
+}
+.ml10{
+    margin-left: 10px;
+}
+.ml-20{
+    margin-left: -20px;
+}
+.mr-20{
+    margin-right: -20px;
+}
