@@ -9,35 +9,63 @@
 </head>
 <body>
     <div id="content">
+        <h2>
+            <select class="selct" id="acaYear" onchange="initChart()"></select>
+            <select class="selct" id="subject" onchange="initChart()"></select>
+        </h2>
         <div id="centerChart" style="width:70%;height:700px;display: inline-block"></div>
     </div>
     <script>
+        var acaYears =['2015第一学期','2015第二学期','2016第一学期','2016第二学期','2017第一学期','2017第二学期'];
+        var subjects = ['物理','化学','生物','历史','地理','政治'];
+        var options = ''
+        $(subjects).each(function(i,item){
+            options+='<option value="'+i+'">'+item+'</option>';
+        })
+        $('#subject').append(options);
+        var options1 = ''
+        $(acaYears).each(function(i,item){
+            options1+='<option value="'+i+'">'+item+'</option>';
+        })
+        $('#acaYear').append(options1);
         $(function(){
             initChart()
         })
-        var data = [
-            [
-                [88,88,88,'小明1','2017第一学期'],
-                [88,88,88,'小明2','2017第一学期'],
-                [88,88,88,'小明3','2017第一学期'],
-                [88,88,88,'小明4','2017第一学期'],
-                [88,88,88,'小明5','2017第一学期'],
-                [88,88,88,'小明6','2017第一学期'],
-                [88,88,88,'小明7','2017第一学期'],
-                [88,88,88,'小明8','2017第一学期'],
-                [88,88,88,'小明9','2017第一学期'],
-                [88,88,88,'小明10','2017第一学期'],
-            ]
-        ];
+
+
         function initChart(){
+            var text = $('#acaYear option:selected').text();
+            var text1 = $('#subject option:selected').text();
+            var data = [[
+                [60,60,11,'王明',text],
+                [68,68,11,'小华',text],
+                [85,85,11,'小华2',text],
+                [80,80,11,'小华3',text],
+                [88,88,11,'小华4',text],
+                [86,86,11,'小华5',text],
+                [82,82,11,'小华6',text],
+                [79,79,11,'小华7',text],
+                [80,80,11,'小华8',text],
+                [86,86,11,'小华9',text],
+                [88,88,11,'小华10',text],
+                [99,99,11,'小华11',text],
+                [79,79,11,'小华12',text],
+                [82,82,11,'小华13',text],
+                [86,86,11,'小华14',text],
+                [88,88,11,'小华15',text],
+                [88,88,11,'小华16',text],
+                [88,88,11,'小华17',text],
+                [88,88,11,'小华18',text]
+            ]];
             var initChart = echarts.init(document.getElementById('centerChart'));
-            var option  ={
+            var option = {
                 title: {
-                    text: '学生物理选科数据质量分析'
+                    text: text+'学生'+text1+'选科数据质量分析',
+                    x:'center'
                 },
                 legend: {
                     right: 10,
-                    data: ['2017第一学期', '2017第二学期']
+                    data: ['1990']
                 },
                 xAxis: {
                     splitLine: {
@@ -52,16 +80,15 @@
                             type: 'dashed'
                         }
                     },
-                    scale: true
+                    scale: true,
+                    min:0,
+                    max:100
                 },
-                series: [
-                    {
-                    name: '2017第一学期',
+                series: [{
+                    name:text,
                     data: data[0],
                     type: 'scatter',
-                    symbolSize: function (data) {
-                        return Math.sqrt(data[2]) / 5e2;
-                    },
+
                     label: {
                         emphasis: {
                             show: true,
@@ -71,22 +98,10 @@
                             position: 'top'
                         }
                     },
-                    itemStyle: {
-                        normal: {
-                            shadowBlur: 10,
-                            shadowColor: 'rgba(120, 36, 50, 0.5)',
-                            shadowOffsetY: 5,
-                            color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                                offset: 0,
-                                color: 'rgb(251, 118, 123)'
-                            }, {
-                                offset: 1,
-                                color: 'rgb(204, 46, 72)'
-                            }])
-                        }
-                    }
+
                 }]
-            }
+            };
+
             initChart.setOption(option)
         }
     </script>
