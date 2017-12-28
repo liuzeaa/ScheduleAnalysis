@@ -3,18 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>学生选科数据质量分析</title>
-    <link rel="stylesheet" href="../style.css">
-    <script src="../js/jquery-1.11.2.min.js"></script>
-    <script src="../js/echarts.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <div id="content">
-        <h2>
-            <select class="selct" id="acaYear" onchange="initChart()"></select>
-            <select class="selct" id="subject" onchange="initChart()"></select>
-        </h2>
-        <div id="centerChart" style="width:70%;height:700px;display: inline-block"></div>
+<!--头部-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <!--小屏幕导航按钮-->
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--小屏幕导航按钮-->
+            <div class="h-title">
+                <a href="javascript:void(0)" class="logo"><img src="../image/logo.png" alt=""></a>
+                <span >数据中心</span>
+            </div>
+        </div>
+        <!--导航按钮-->
+        <div class="navbar-collapse collapse" >
+            <ul class="nav navbar-nav">
+                <li class="navbar-active"><a href="javascript:void(0)">首页</a></li>
+                <li><a href="javascript:void(0)">教育管理</a></li>
+                <li><a href="javascript:void(0)">教师发展</a></li>
+                <li><a href="javascript:void(0)">学生成长</a></li>
+                <li><a href="javascript:void(0)">教学评价</a></li>
+            </ul>
+
+        </div>
+        <!--导航按钮-->
     </div>
+</nav>
+<div class="container-fluid" style="margin-top: 60px;">
+    <div calss="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title">选课推荐</h2>
+                </header>
+                <div class="panel-body" style="text-align: center">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label">选择学期</label>
+                        <div class="col-md-4">
+                            <select class="form-control mb-md" id="acaYear" onchange="initChart()">
+
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label">选择学科</label>
+                        <div class="col-md-4">
+                            <select class="form-control mb-md" id="subject" onchange="initChart()">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div id="centerChart" style="width:70%;height:700px;display: inline-block"></div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/echarts.min.js"></script>
     <script>
         var acaYears =['2015第一学期','2015第二学期','2016第一学期','2016第二学期','2017第一学期','2017第二学期'];
         var subjects = ['物理','化学','生物','历史','地理','政治'];

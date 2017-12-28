@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>教师工作量统计分析</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<!--头部-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <!--小屏幕导航按钮-->
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--小屏幕导航按钮-->
+            <div class="h-title">
+                <a href="javascript:void(0)" class="logo"><img src="../image/logo.png" alt=""></a>
+                <span >数据中心</span>
+            </div>
+        </div>
+        <!--导航按钮-->
+        <div class="navbar-collapse collapse" >
+            <ul class="nav navbar-nav">
+                <li class="navbar-active"><a href="javascript:void(0)">首页</a></li>
+                <li><a href="javascript:void(0)">教育管理</a></li>
+                <li><a href="javascript:void(0)">教师发展</a></li>
+                <li><a href="javascript:void(0)">学生成长</a></li>
+                <li><a href="javascript:void(0)">教学评价</a></li>
+            </ul>
+
+        </div>
+        <!--导航按钮-->
+    </div>
+</nav>
+<!--头部end-->
+    <div class="container-fluid" style="margin-top: 60px;">
+        <div calss="row">
+            <div class="col-md-4">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2 class="panel-title">学科-校周课时/人统计</h2>
+                    </header>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">选择学科</label>
+                            <div class="col-md-6">
+                                <select class="form-control mb-md" id="subject" onchange="initChart()">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div id="chart1"  style="width: 100%;height:700px;"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2 class="panel-title">区级单学科教师工作量</h2>
+                    </header>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">选择学科</label>
+                            <div class="col-md-6">
+                                <select class="form-control mb-md" id="subject2" onchange="initChart1()">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div id="chart2"  style="width: 100%;height:700px;"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2 class="panel-title">学科等级考和合格考课时统计</h2>
+                    </header>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">选择学科</label>
+                            <div class="col-md-6">
+                                <select class="form-control mb-md" id="subject3" onchange="initChart2()">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div id="chart3"  style="width: 100%;height:700px;"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+    <script>
+        var schools = ['八一中学','妙峰山学校','大峪中学','永定中学','清水中学','王平中学','雁翅中学','军庄中学'];
+        var subjects = ['物理','化学','生物','历史','地理','政治'];
+        var options = ''
+        $(subjects).each(function(i,item){
+            options+='<option value="'+i+'">'+item+'</option>';
+        })
+        $('#subject,#subject2,#subject3').append(options);
+        $(function(){
+            initChart();
+            initChart1();
+            initChart2();
+        })
+        function initChart(){
+            var text = $('#subject option:selected').text();
+            var  chart1 = echarts.init(document.getElementById('chart1'));
+            var option = {
+                title:{
+                    text:text+"学科-校周课时/人统计",
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}课时"
+                },
+                legend: {
+                    data:['平均周课/人'],
+                    top:'bottom',
+                    left:'center'
+                },
+                xAxis :
+                    {
+                        type : 'category',
+                        data: schools
+                    },
+                color:['#358CC1'],
+                yAxis : {
+                    type : 'value'
+                },
+                series : [
+                    {
+                        name:text+'平均周课/人',
+                        type:'bar',
+                        data:[6,11,12,12,12,12,11,14],
+                        markLine : {
+                            data : [
+                                {type : 'average', name : '平均值'}
+                            ]
+                        }
+                    }
+                ]
+            };
+
+            chart1.setOption(option);
+        }
+        function initChart1(){
+            var text = $('#subject2 option:selected').text();
+            var  chart2 = echarts.init(document.getElementById('chart2'));
+            var option = {
+                title:{
+                    text:text+"学科-校周课时/人统计柱状图",
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}课时"
+                },
+                legend: {
+                    data:['周总课时'],
+                    top:'bottom',
+                    left:'center'
+                },
+                xAxis :
+                    {
+                        type : 'category',
+                        data: ['张江（军庄中学）','王得全（军庄中学）','赵东阳（军庄中学）','陈兰芝（雁翅中学）','郭泽（八一中学）']
+                    },
+                color:['#2D9C9F'],
+                yAxis : {
+                    type : 'value'
+                },
+                series : [
+                    {
+                        name:text+'周总课时',
+                        type:'bar',
+                        barWidth:'50%',
+                        data:[18,16,14,12,9],
+                        markLine : {
+                            data : [
+                                {type : 'average', name : '平均值'}
+                            ]
+                        }
+                    }
+                ]
+            }
+            chart2.setOption(option);
+        }
+        function initChart2(){
+            var text = $('#subject3 option:selected').text();
+            var  chart3 = echarts.init(document.getElementById('chart3'));
+            var option = {
+                title:{
+                    text:text+"学科等级考和合格考课时统计",
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}课时"
+                },
+                legend: {
+                    data:['等级考课时','合格考课时'],
+                    top:'bottom',
+                    left:'center'
+                },
+                xAxis :
+                    {
+                        type : 'category',
+                        data:schools
+                    },
+                color:['#5B9BD5','#ED7D31'],
+                yAxis : {
+                    type : 'value'
+                },
+                series : [
+                    {
+                        name:text+'等级考课时',
+                        type:'bar',
+                        data:[4,3,5,4,3,4,3,4],
+                        markLine : {
+                            data : [
+                                {type : 'average', name : '平均值'}
+                            ]
+                        }
+                    },
+                    {
+                        name:text+'合格考课时',
+                        type:'bar',
+                        data:[2,2,3,3,1,1,2,3],
+                        markLine : {
+                            data : [
+                                {type : 'average', name : '平均值'}
+                            ]
+                        }
+                    }
+                ]
+            }
+            chart3.setOption(option);
+        }
+    </script>
+</body>
+</html>

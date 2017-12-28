@@ -1,4 +1,11 @@
+
+.panel{
+    margin-top: 15px;
+}
 *{padding:0;margin:0;box-sizing: border-box;}
+body{
+    background: #ccc;
+}
 .left{
     float:left;
 }
@@ -20,10 +27,10 @@
     width:50%;
 }
 .wrap_left .title{
-    color:#72AB64
+    color:#72AB64;text-align: center;
 }
 .wrap_right .title{
-    color:#EB6160
+    color:#EB6160;text-align: center;
 }
 .process li {
     height:30px;list-style:none;border-radius:5px;margin-top: 30px;
@@ -99,3 +106,96 @@
 .recommend ul li{list-style: none;
     float: left;line-height: 35px;}
 .nav_title{text-align: left;}
+
+
+/*头部logo标题*/
+.h-title{
+    line-height: 52px;
+}
+.logo{
+    width: 45px;
+    height: 40px;
+    display: inline-block;
+}
+.logo img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.h-title span{
+    color: #fff;
+    margin-left: 5px;
+}
+/*悬浮*/
+.hover-top {
+    position: relative;
+    transition: all .3s linear;
+    top: 0;
+    cursor: pointer;
+}
+
+.hover-top:hover {
+    top: -5px;
+}
+/*导航*/
+.navbar-default{
+    background-color:rgb(18,46,92) ;
+}
+.navbar-default .navbar-nav>li>a{
+    color: #fff;
+}
+.navbar-default .navbar-nav>li>a:hover{
+    color: #fff;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+    color: #fff;
+}
+.navbar-active{
+    border-color: #fff!important;
+}
+@media (min-width: 768px){
+    .navbar-nav{
+        float: right;
+    }
+    .navbar-nav>li{
+        border-bottom: 2px solid transparent;
+        margin-left: 5px;
+        transition: all linear 0.1s;
+    }
+    .navbar-nav>li:hover {
+        border-color: #fff;
+    }
+}
+/*内容框架*/
+.content{
+    margin-top: 75px;
+    background-color:#fffff9 ;
+    overflow: hidden;
+    padding: 15px 15px 0 15px;
+}
+.c-frame{
+    -moz-box-shadow: 0 0 2px #ccc;
+    box-shadow: 0 0 2px #ccc;
+}
+.c-frame-height{
+    height: 300px;
+}
+.c-frame-bottom p{
+    overflow: hidden;
+    height: 63px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+.c-frame-bottom{
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.data-img{
+    height: 166px;
+    overflow: hidden;
+    width: 248px;
+}
+.data-img img{
+    width: 100%;
+    height: 100%;
+}
