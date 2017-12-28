@@ -176,12 +176,10 @@ body{
     -moz-box-shadow: 0 0 2px #ccc;
     box-shadow: 0 0 2px #ccc;
 }
-.c-frame-height{
-    height: 300px;
-}
+
 .c-frame-bottom p{
     overflow: hidden;
-    height: 63px;
+    min-height:25px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;

@@ -127,7 +127,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="wrap clearfix" style="padding:0px 20%;">
+                        <div class="wrap clearfix" style="padding:0px 20px;">
                             <div class="left wrap_left">
                                 <h3 class="title">男生比女生多</h3>
                                 <ul class="process">
@@ -202,7 +202,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="wrap clearfix" style="padding:0px 20%;">
+                        <div class="wrap clearfix" style="padding:0px 20px;">
                             <div class="left wrap_left">
                                 <h3 class="title">高一</h3>
                                 <ul class="process">
@@ -457,7 +457,6 @@
 
 
             initChart8('bar');
-
             $('#type').change(function(){
                 var value = $(this).val();
                 initChart8(value);
@@ -823,9 +822,14 @@
             };
             chart7.setOption(option);
         }
-
+		
         function initChart8(type){
-            var text1 = $('#school4 option:selected').text();
+            
+			var text1 = $('#school4 option:selected').text();
+		$('#school4').change(function(){
+				text1 = $(this).children('option:selected').text();
+				initChart8(type)
+			})
             var  chart8 = echarts.init(document.getElementById('chart8'));
             var option = {
                 title : {
